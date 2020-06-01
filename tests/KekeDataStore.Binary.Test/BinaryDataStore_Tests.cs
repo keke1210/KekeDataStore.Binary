@@ -84,7 +84,7 @@ namespace KekeDataStore.Binary.Test
 
 
         [Test]
-        [TestCase("01bc285a-3926-4782-9f3e-bc5d059681df")]
+        [TestCase("4b6d70f9-3f8d-477f-a870-55f8dd11980d")]
         public void Delete_Contact_Test(string id)
         {
             var createdContact = _dataStore.Delete(id);
