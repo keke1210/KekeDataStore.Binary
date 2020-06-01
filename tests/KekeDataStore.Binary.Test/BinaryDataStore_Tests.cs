@@ -24,7 +24,7 @@ namespace KekeDataStore.Binary.Test
             var contacts = _dataStore.GetAll();
 
             // Write data to txt file on the specified path to see the data visually
-            await DrawContactTable.VisualizeToFile(contacts, @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\tests\KekeDataStore.Binary.Test\VisualData\Files\Contacts_Test.txt");
+            await DrawContactTable.VisualizeToFileAsync(contacts, @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\tests\KekeDataStore.Binary.Test\VisualData\Files\Contacts_Test.txt");
 
             Assert.AreEqual(contacts.Count(), _dataStore.Count);
         }

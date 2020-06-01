@@ -17,7 +17,7 @@ namespace KekeDataStore.Binary.Test
         /// Displays a list of Contact objects that are in the Phonebooks binary file
         /// </summary>
         /// <param name="phoneBooks">List of phonebooks to be displayed</param>
-        internal static async Task VisualizeToFile(IEnumerable<Contact> contacts, string path = null)
+        internal static async Task VisualizeToFileAsync(IEnumerable<Contact> contacts, string path = null)
         {
             string outputFilePath = path ?? @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\tests\KekeDataStore.Binary.Test\VisualData\Files\Contacts.txt";
 
