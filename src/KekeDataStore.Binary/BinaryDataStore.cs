@@ -25,7 +25,7 @@ namespace KekeDataStore.Binary
         {
             _dataFilePath = SetFilePath(dirPath, dbName);
 
-            _data = new Lazy<Dictionary<string, T>>(() => BinaryFileUtils.LoadFile<T>(_dataFilePath), true);
+            _data = new Lazy<Dictionary<string, T>>(() => ReadFromBinaryFile(_dataFilePath), true);
         }
         
         public int Count => _data.Value.Count;
@@ -170,13 +170,41 @@ namespace KekeDataStore.Binary
         {
             bool WriteFunc()
             {
-                BinaryFileUtils.WriteToFile(_data.Value, _dataFilePath);
+                WriteToBinaryFile(_data.Value, _dataFilePath);
                 return true;
             }
 
             var changesSaved = (bool?)WriteLocked(WriteFunc) ?? false;
 
             return changesSaved;
+        }
+
+        /// <summary>
+        /// Serializes the _data collectuin to the binary file
+        /// </summary>
+        private static void WriteToBinaryFile(Dictionary<string, T> data, string dbPath)
+        {
+            BinaryFileUtils.WriteToFile(data, dbPath);
+        }
+
+        /// <summary>
+        /// Reads dictionary object from the binary file. If file doesn't exists it creates a new empty dictionary
+        /// </summary>
+        /// <param name="dbFile"></param>
+        /// <returns></returns>
+        private static Dictionary<string, T> ReadFromBinaryFile(string dbFile)
+        {
+            if (File.Exists(dbFile))
+            {
+                var result = BinaryFileUtils.LoadFile<T>(dbFile);
+                return result;
+            }
+            else
+            {
+                var emptyData = new Dictionary<string, T>();
+                BinaryFileUtils.WriteToFile(emptyData, dbFile);
+                return emptyData;
+            }
         }
 
         /// <summary>
