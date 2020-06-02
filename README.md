@@ -8,7 +8,7 @@ KekeDataStore.Binary is a simple data storage library that stores data into bina
 )](https://www.nuget.org/packages/KekeDataStore.Binary/)
 
 
-Simple data store api library that saves the data in .bin format files, separated for each Entity. You can see these files like tables in RDBMS or Collections in NoSQL.
+Simple data store api library that saves the data in ``.bin`` format files, separated for each Entity you specify. You can see these files like tables in RDBMS or Collections in NoSQL.
 
 * Small API with basic functionality that is needed for handling CRUD operations.
 * Thread-safe.
