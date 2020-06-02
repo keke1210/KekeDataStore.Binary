@@ -68,7 +68,6 @@ public class Contact : IBaseEntity
 [Serializable]
 public class Person
 {
-    public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
 }
@@ -76,7 +75,6 @@ public class Person
 [Serializable]
 public class Phone
 {
-    public Guid Id { get; set; }
     public string PhoneNumber { get; set; }
     public PhoneType Type { get; set; }
 }
