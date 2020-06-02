@@ -183,7 +183,8 @@ await DrawContactTable.VisualizeToFileAsync(contacts, @"C:\..Path\filename.txt")
 ### Best Practices
 #### Depenency Injection
 
-Best practice when you want to use the library as an in-memory db and not save data in file, is to use ``AddScoped`` . You can use ``AddTransient``, which can be used in cases when you always save changes that you make, but it's not very efficent solution. Don't use ``AddSingleton`` in cases when different users make changes to the file because when many different users are going to access the store data corruption will happen. 
+Best practice when you want to use the library as an in-memory db and not save data in file, is to use ``AddScoped`` . You can use ``AddTransient``, which can be used in cases when you always save changes that you make, but it's not a very efficent. 
+Don't use ``AddSingleton`` in cases when different users make changes to the file, because data corruption will happen. When there is a single instance object in the whole project, one user can save different changes for another user. Ex. we have to users 'client1' and 'client2'. Client one creates a new Contact object, in the same time client2 deletes all data in collection. When the client1 or client2 calls SaveChanges, all the data will be gone and client1's new item it's not stored.
 You can register it in a Depenency Injection framework like this:
 
 ```csharp
