@@ -5,12 +5,12 @@
 )](https://www.nuget.org/packages/KekeDataStore.Binary/)
 
 
-Simple binary flat file data store api, that saves the data in ``binary(.bin)``.
+Simple data store that saves the data into ``binary(.bin)`` binary files.
 
 * Small API with basic functionality that is needed for handling CRUD operations.
 * Thread-safe.
 * Works with strongly typed data
-* Data is stored in separated Binary files
+* Data is stored in separated binary files
   * Easy to initialize
   * Very fast (Key-Value)
   * In-memory db 
