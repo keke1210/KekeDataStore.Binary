@@ -32,9 +32,6 @@ PM> Install-Package KekeDataStore.Binary -Version 1.0.3
 
 # PackageReference
 <PackageReference Include="KekeDataStore.Binary" Version="1.0.3" />
-
-# Paket CLI
-paket add KekeDataStore.Binary --version 1.0.3
 ```
 
 ## Usage
