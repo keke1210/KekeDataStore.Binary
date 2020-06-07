@@ -25,16 +25,16 @@ You can install the latest version via [NuGet](https://www.nuget.org/packages/Ke
 
 ```sh
 # Package Manager
-PM> Install-Package KekeDataStore.Binary -Version 1.0.2
+PM> Install-Package KekeDataStore.Binary -Version 1.0.3
 
 # .NET CLI
-> dotnet add package KekeDataStore.Binary --version 1.0.2
+> dotnet add package KekeDataStore.Binary --version 1.0.3
 
 # PackageReference
-<PackageReference Include="KekeDataStore.Binary" Version="1.0.2" />
+<PackageReference Include="KekeDataStore.Binary" Version="1.0.3" />
 
 # Paket CLI
-paket add KekeDataStore.Binary --version 1.0.2
+paket add KekeDataStore.Binary --version 1.0.3
 ```
 
 ## Usage
