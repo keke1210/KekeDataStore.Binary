@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using TestModels;
 
 namespace KekeDataStore.Binary.Test
 {
-    internal static class DrawContactTable
+    public static class DrawContactTableExtension
     {
         private const int TABLE_WIDTH = 185;
         private const int ROW_COUNT_COL_WIDTH = 14;
@@ -16,14 +15,14 @@ namespace KekeDataStore.Binary.Test
         /// <summary>
         /// Displays a list of Contact objects that are in the Phonebooks binary file
         /// </summary>
-        /// <param name="phoneBooks">List of phonebooks to be displayed</param>
-        internal static async Task VisualizeToFileAsync(IEnumerable<Contact> contacts, string path = null)
+        /// <param name="contacts">List of phonebooks to be displayed</param>
+        public static void VisualizeToFile(this IEnumerable<Contact> contacts, string path = null)
         {
-            string outputFilePath = path ?? @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\tests\KekeDataStore.Binary.Test\VisualData\Files\Contacts.txt";
+            string outputFilePath = path ?? @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\Visuals\OutputFiles\Contacts.txt";
 
             var sb = new StringBuilder();
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            await File.WriteAllTextAsync(outputFilePath, string.Empty);
+            File.WriteAllText(outputFilePath, string.Empty);
 
             sb.AppendLine();
             sb.Append(new string(' ', TABLE_WIDTH / 2 - 20));
@@ -37,7 +36,7 @@ namespace KekeDataStore.Binary.Test
             var rowCount = 1;
             foreach (var item in contacts)
             {
-                // Every 100 records drow a line
+                // Every 100 records draw a line
                 if (rowCount % 101 == 0)
                     sb.AppendLine(PrintLine());
 
@@ -55,7 +54,7 @@ namespace KekeDataStore.Binary.Test
             sb.Append(new string(' ', LOAD_TIME_POSITION_SPACES));
             sb.Append(loadTime);
 
-            await File.AppendAllTextAsync(outputFilePath, sb.ToString());
+            File.AppendAllText(outputFilePath, sb.ToString());
         }
 
         private static string PrintLine()

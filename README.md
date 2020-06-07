@@ -5,7 +5,7 @@
 )](https://www.nuget.org/packages/KekeDataStore.Binary/)
 
 
-Simple data store that saves the data into ``binary(.bin)`` binary files.
+Simple data store that saves the data into ``binary(.bin)`` files.
 
 * Small API with basic functionality that is needed for handling CRUD operations.
 * Thread-safe.

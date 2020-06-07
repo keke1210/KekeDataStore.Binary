@@ -10,7 +10,7 @@ namespace KekeDataStore.Binary.Test
     public class BinaryDataStore_Tests
     {
         private readonly string _dataPath = @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\tests\KekeDataStore.Binary.Test\Database";
-        
+        private readonly string _visualFilePath = @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\tests\KekeDataStore.Binary.Test\OutputFiles\Contacts_Test.txt";
         private readonly IBinaryDataStore<Contact> _dataStore;
 
         public BinaryDataStore_Tests()
@@ -19,12 +19,12 @@ namespace KekeDataStore.Binary.Test
         }
 
         [Test]
-        public async Task GetAll_Test()
+        public void GetAll_Test()
         {
             var contacts = _dataStore.GetAll();
 
             // Write data to txt file on the specified path to see the data visually
-            await DrawContactTable.VisualizeToFileAsync(contacts, @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\tests\KekeDataStore.Binary.Test\VisualData\Files\Contacts_Test.txt");
+            contacts.VisualizeToFile(_visualFilePath);
 
             Assert.AreEqual(contacts.Count(), _dataStore.Count);
         }

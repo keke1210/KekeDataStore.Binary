@@ -14,12 +14,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\KekeDataStore.Binary\KekeDataStore.Binary.csproj" />
+    <ProjectReference Include="..\..\Visuals\Visuals.csproj" />
     <ProjectReference Include="..\TestModels\TestModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Database\" />
-    <Folder Include="VisualData\Files\" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\KekeDataStore.Binary\KekeDataStore.Binary.csproj" />
+    <ProjectReference Include="..\tests\TestModels\TestModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="OutputFiles\" />
   </ItemGroup>
 
 </Project>

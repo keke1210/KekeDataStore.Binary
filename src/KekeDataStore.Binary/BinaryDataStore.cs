@@ -27,8 +27,10 @@ namespace KekeDataStore.Binary
 
             _data = new Lazy<Dictionary<string, T>>(() => ReadFromBinaryFile(_dataFilePath), true);
         }
-        
-        public int Count => _data.Value.Count;
+        public int Count
+        {
+            get => ReadLocked(() => _data.Value.Count);
+        }
 
         public IQueryable<T> AsQueryable()
         {
