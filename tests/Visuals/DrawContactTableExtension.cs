@@ -18,7 +18,7 @@ namespace KekeDataStore.Binary.Test
         /// <param name="contacts">List of phonebooks to be displayed</param>
         public static void VisualizeToFile(this IEnumerable<Contact> contacts, string path = null)
         {
-            string outputFilePath = path ?? @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\Visuals\OutputFiles\Contacts.txt";
+            string outputFilePath = path ?? @"C:\Users\Keke\Desktop\MyNuGet\KekeDataStore\Visuals\OutputFiles\Contacts_OutputFile.txt";
 
             var sb = new StringBuilder();
             var watch = System.Diagnostics.Stopwatch.StartNew();

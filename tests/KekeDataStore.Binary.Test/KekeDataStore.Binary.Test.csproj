@@ -14,8 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\KekeDataStore.Binary\KekeDataStore.Binary.csproj" />
-    <ProjectReference Include="..\..\Visuals\Visuals.csproj" />
     <ProjectReference Include="..\TestModels\TestModels.csproj" />
+    <ProjectReference Include="..\Visuals\Visuals.csproj" />
   </ItemGroup>
 
   <ItemGroup>

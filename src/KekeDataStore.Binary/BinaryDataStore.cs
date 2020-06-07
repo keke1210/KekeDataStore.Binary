@@ -27,6 +27,7 @@ namespace KekeDataStore.Binary
 
             _data = new Lazy<Dictionary<string, T>>(() => ReadFromBinaryFile(_dataFilePath), true);
         }
+
         public int Count
         {
             get => ReadLocked(() => _data.Value.Count);
@@ -44,11 +45,13 @@ namespace KekeDataStore.Binary
         public IEnumerable<T> GetAll() 
         {
             IEnumerable<T> ReadFunc() => _data.Value.Select(x => x.Value);
-            
+
             var elements = ReadLocked(ReadFunc);
 
             return elements;
-        } 
+        }
+
+        //public IEnumerable<T> GetAll() => ReadLocked(() => _data.Value.Select(x => x.Value));
 
         public IEnumerable<T> Get(Predicate<T> predicate) 
         {
@@ -94,33 +97,33 @@ namespace KekeDataStore.Binary
             return createdItem;
         }
 
-        public bool Delete(string Id)
+        public bool Delete(string id)
         {
             void ReadAction()
             {
-                if (Id.IsEmptyGuid()) throw new ArgumentNullException(nameof(Id));
+                if (id.IsEmptyGuid()) throw new ArgumentNullException(nameof(id));
 
                 T element;
-                var elementExists = _data.Value.TryGetValue(Id, out element);
+                var elementExists = _data.Value.TryGetValue(id, out element);
 
                 if (!elementExists) throw new KekeDataStoreException("Element doesn't exists on the collection!");
             }
                     
-            bool WriteFunc() => _data.Value.Remove(Id);
+            bool WriteFunc() => _data.Value.Remove(id);
             
             var deleted = UpgradeableReadLocked<bool>(ReadAction, WriteFunc);
 
             return deleted;
         }
 
-        public T GetById(string Id)
+        public T GetById(string id)
         {
             T ReadFunc()
             {
-                if (Id.IsEmptyGuid()) throw new ArgumentNullException(nameof(Id));
+                if (id.IsEmptyGuid()) throw new ArgumentNullException(nameof(id));
 
                 T element;
-                _data.Value.TryGetValue(Id, out element);
+                _data.Value.TryGetValue(id, out element);
                 
                 return element;
             }
@@ -219,7 +222,7 @@ namespace KekeDataStore.Binary
         {
             if (!Directory.Exists(directory))
             {
-                var defaultDirectory = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "");
+                var defaultDirectory = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName, "Datafiles");
 
                 if (!Directory.Exists(defaultDirectory))
                     Directory.CreateDirectory(defaultDirectory);
