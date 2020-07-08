@@ -7,6 +7,7 @@ namespace KekeDataStore.Binary
     /// </summary>
     public interface IBaseEntity
     {
+        Guid ClientId { get; set; }
         /// <summary>
         /// Key of the Entity
         /// </summary>

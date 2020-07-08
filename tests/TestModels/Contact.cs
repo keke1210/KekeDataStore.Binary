@@ -6,6 +6,7 @@ namespace TestModels
     [Serializable]
     public class Contact : IBaseEntity
     {
+        public Guid ClientId { get; set; }
         public Guid Id { get; set; }
         public Person Person { get; set; }
         public Phone Phone { get; set; }
