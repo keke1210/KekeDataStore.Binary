@@ -93,12 +93,12 @@ namespace KekeDataStore.Binary
         }
 
         // Takes the user Id and _data of the user
-        private static void AppendData(string filename, string userId, byte[] data)
+        private static void AppendData(string filename, string clientId, byte[] data)
         {
             using (Stream fileStream = Stream.Synchronized(new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.None)))
             using (var bw = new BinaryWriter(fileStream))
             {
-                bw.Write(userId);
+                bw.Write(clientId);
                 bw.Write(data);
             }
         }

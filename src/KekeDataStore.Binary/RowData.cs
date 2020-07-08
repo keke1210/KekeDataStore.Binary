@@ -4,7 +4,7 @@ namespace KekeDataStore.Binary
 {
     public interface IRowData<T> 
     {
-        string UserId { get; set; }
+        string ClientId { get; set; }
         Dictionary<string, T> DataCollection { get; set; }
     }
 
@@ -13,7 +13,7 @@ namespace KekeDataStore.Binary
         /// <summary>
         /// Identifier for the client user
         /// </summary>
-        public string UserId { get; set; }
+        public string ClientId { get; set; }
         public Dictionary<string, T> DataCollection { get; set; }
     }
 }
