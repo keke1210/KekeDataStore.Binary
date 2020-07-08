@@ -179,7 +179,7 @@ namespace KekeDataStore.Binary
                 return true;
             }
 
-            var changesSaved = (bool?)WriteLocked(WriteFunc) ?? false;
+            var changesSaved = (bool?) WriteLocked(WriteFunc) ?? false;
 
             return changesSaved;
         }

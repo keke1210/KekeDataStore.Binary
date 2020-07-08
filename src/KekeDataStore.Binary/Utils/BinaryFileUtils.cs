@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -16,21 +17,20 @@ namespace KekeDataStore.Binary
         /// <typeparam name="T">Values of Dictionary</typeparam>
         /// <param name="obj">Object you want to serialize</param>
         /// <param name="filename">name of file where you want to serialize content</param>
-        internal static void WriteToFile<T>(Dictionary<string, T> obj, string filename)
+        internal static void WriteToFile<T>(Dictionary<string, T> obj, string filename) where T : IBaseEntity
         {
             if (!typeof(T).IsSerializable)
                 throw new KekeDataStoreException($"Type '{typeof(T).Name}' is not marked serializable!");
 
             Stopwatch sw = null;
-            Stream stream = null;
-            IFormatter formatter = new BinaryFormatter();
+            BinaryWriter writer = null;
 
             while (true)
             {
                 try
                 {
-                    stream = Stream.Synchronized(new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None, 4096, true));
-                    formatter.Serialize(stream, obj);
+                    var id = obj.Values.FirstOrDefault()?.Id.ToString();
+                    AppendData(filename, id, obj.ToByteArray());
                     break;
                 }
                 catch (IOException e) when (e.Message.Contains("because it is being used by another process"))
@@ -46,10 +46,11 @@ namespace KekeDataStore.Binary
                 }
                 finally
                 {
-                    stream?.Dispose();
+                    writer?.Dispose();
                 }
             }
         }
+
 
         /// <summary>
         /// Reads content of a binary file. 
@@ -71,7 +72,7 @@ namespace KekeDataStore.Binary
                 try
                 {
                     stream = Stream.Synchronized(new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true));
-                    return formatter.Deserialize(stream);
+                    return (true, formatter.Deserialize(stream));
                 }
                 catch (IOException e) when (e.Message.Contains("because it is being used by another process"))
                 {
@@ -88,6 +89,30 @@ namespace KekeDataStore.Binary
                 {
                     stream?.Dispose();
                 }
+            }
+        }
+
+        // Takes the user Id and _data of the user
+        private static void AppendData(string filename, string userId, byte[] data)
+        {
+            using (Stream fileStream = Stream.Synchronized(new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.None)))
+            using (var bw = new BinaryWriter(fileStream))
+            {
+                bw.Write(userId);
+                bw.Write(data);
+            }
+        }
+
+
+        private static byte[] ToByteArray(this object obj)
+        {
+            if (obj == null)
+                return null;
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
             }
         }
     }
