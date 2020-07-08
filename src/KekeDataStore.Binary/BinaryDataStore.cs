@@ -202,7 +202,7 @@ namespace KekeDataStore.Binary
             if (File.Exists(dbFile))
             {
                 var result = BinaryFileUtils.LoadFile<T>(dbFile);
-                return result;
+                return (Dictionary<string, T>) result;
             }
             else
             {
